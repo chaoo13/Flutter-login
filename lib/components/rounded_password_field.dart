@@ -12,7 +12,8 @@ class RoundedPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+        validator: (val) => val.length < 8 ? 'password is too short' : null,
         obscureText: true,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
