@@ -1,6 +1,8 @@
+import 'package:building/Screens/Login/login_screen.dart';
+import 'package:building/Screens/Signup/signup_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
-import 'package:flutter_auth/constants.dart';
+import 'package:building/Screens/Welcome/welcome_screen.dart';
+import 'package:building/constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,13 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Auth',
-      theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: WelcomeScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Auth',
+        theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        // home: WelcomeScreen(),
+        routes: {
+          '/': (context) => WelcomeScreen(),
+          '/login': (context) => LoginScreen(),
+          '/signup': (context) => SignUpScreen(),
+        });
   }
 }

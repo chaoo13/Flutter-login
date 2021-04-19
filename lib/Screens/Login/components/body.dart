@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Login/components/background.dart';
-import 'package:flutter_auth/Screens/Signup/signup_screen.dart';
-import 'package:flutter_auth/components/already_have_an_account_acheck.dart';
-import 'package:flutter_auth/components/rounded_button.dart';
-import 'package:flutter_auth/components/rounded_input_field.dart';
-import 'package:flutter_auth/components/rounded_password_field.dart';
+import 'package:building/Screens/Login/components/background.dart';
+import 'package:building/Screens/Signup/signup_screen.dart';
+import 'package:building/components/already_have_an_account_acheck.dart';
+import 'package:building/components/rounded_button.dart';
+import 'package:building/components/rounded_input_field.dart';
+import 'package:building/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Body extends StatelessWidget {
-  const Body({
+class Login extends StatefulWidget {
+  const Login({
     Key key,
   }) : super(key: key);
 
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  String email = '';
+  String password = '';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,26 +39,26 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Your Email",
-              onChanged: (value) {},
+              onChanged: (value) {
+                setState(() => email = value);
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                setState(() => password = value);
+              },
             ),
             RoundedButton(
               text: "LOGIN",
-              press: () {},
+              press: () {
+                print(email);
+                print(password);
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
-                    },
-                  ),
-                );
+                Navigator.popAndPushNamed(context, '/signup');
               },
             ),
           ],
