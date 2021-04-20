@@ -1,5 +1,6 @@
 import 'package:building/model/user.dart';
 import 'package:building/services/auth.dart';
+import 'package:building/services/firestore_database.dart';
 import 'package:flutter/material.dart';
 import 'package:building/Screens/Signup/components/background.dart';
 import 'package:building/Screens/Signup/components/or_divider.dart';
@@ -82,6 +83,8 @@ class _SignupState extends State<Signup> {
                         dynamic result = await _auth
                             .registerWithEmailAndPassword(email, password);
                         if (result is MyUser) {
+                          FirebaseService()
+                              .updateUserDate(result.uid, result.email);
                           Navigator.pop(context);
                         } else {
                           setState(() {
