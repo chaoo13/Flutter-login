@@ -1,49 +1,34 @@
 class Building {
-  int bid;
+  final int bid;
   final String name;
   List<Room> rooms;
 
-  Building(this.name);
+  Building({this.bid, this.name, this.rooms});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'bid': bid,
+      'name': name,
+    };
+  }
 }
 
 class Room {
-  int rid;
-  final int groupId;
-  final String name;
-  Contract contract;
+  final int rid;
+  int groupId;
+  String name;
+  int contractId;
 
-  Room({this.name, this.groupId});
+  Room({this.rid, this.name, this.groupId, this.contractId});
 
   Map<String, dynamic> toMap() {
     return {
       'rid': rid,
       'groupId': groupId,
       'name': name,
-      'contract': contract,
+      'contractId': contractId,
     };
   }
-}
-
-class Contract {
-  int cid;
-  final int roomId;
-  final int personId;
-  final int monthlyRent;
-  final String rentDate;
-  final int deposit;
-  final String depositDate;
-  final String signDate;
-  final String startDate;
-
-  Contract(
-      {this.roomId,
-      this.personId,
-      this.monthlyRent,
-      this.rentDate,
-      this.deposit,
-      this.depositDate,
-      this.signDate,
-      this.startDate});
 }
 
 // class Rental {

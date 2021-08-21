@@ -1,3 +1,4 @@
+import 'package:building/Screens/Person/personDetail.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:building/Screens/Login/login_screen.dart';
 import 'package:building/Screens/Signup/signup_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
               '/': (context) => Wrapper(),
               '/login': (context) => LoginScreen(),
               '/signup': (context) => SignUpScreen(),
+              '/addPersonDetail': (context) => AddPersonDetailScreen(),
             }));
   }
 }

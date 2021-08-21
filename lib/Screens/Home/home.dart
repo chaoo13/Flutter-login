@@ -1,5 +1,9 @@
-import 'package:building/Screens/Home/components/background.dart';
+import 'package:building/Screens/Building/building.dart';
+import 'package:building/Screens/Person/person.dart';
+import 'package:building/components/loading.dart';
+import 'package:building/services/firestore_database.dart';
 import 'package:building/Screens/Home/components/body.dart';
+import 'package:building/model/room.dart';
 import 'package:building/model/user.dart';
 import 'package:building/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +33,19 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      body: HomeBody(),
+      body: StreamBuilder<List<Building>>(
+          stream: FirebaseService().getBuildingList(user.uid),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return HomeBody(buildings: snapshot.data, user: user);
+            } else {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Text('No Building');
+              } else {
+                return Loading();
+              }
+            }
+          }),
       floatingActionButton: SpeedDial(
         // both default to 16
         marginRight: 18,
@@ -57,7 +73,14 @@ class Home extends StatelessWidget {
               label: '회원 추가',
               labelStyle: TextStyle(fontSize: 15.0),
               onTap: () {
-                print('FIRST CHILD');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PersonAdd(user: user);
+                    },
+                  ),
+                );
               }),
           SpeedDialChild(
             child: Icon(Icons.add_business_outlined),
@@ -65,7 +88,14 @@ class Home extends StatelessWidget {
             label: '건물 추가',
             labelStyle: TextStyle(fontSize: 15.0),
             onTap: () {
-              print('SECOND CHILD');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return BuildingAdd(user: user);
+                  },
+                ),
+              );
             },
           ),
         ],
